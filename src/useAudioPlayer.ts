@@ -9,7 +9,8 @@ import { HowlInstanceManager } from "./HowlInstanceManager"
 import { AudioPlayer, LoadArguments } from "./types"
 
 export const useAudioPlayer = (): AudioPlayer & {
-    cleanup: VoidFunction
+    cleanup: VoidFunction,
+    getHowlManager: () => HowlInstanceManager
 } => {
     const howlManager = useRef<HowlInstanceManager | null>(null)
     function getHowlManager() {
@@ -165,6 +166,7 @@ export const useAudioPlayer = (): AudioPlayer & {
         setRate,
         setVolume,
         loop,
-        cleanup
+        cleanup,
+        getHowlManager
     }
 }
