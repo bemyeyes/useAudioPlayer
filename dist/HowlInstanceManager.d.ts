@@ -10,6 +10,7 @@ export declare class HowlInstanceManager {
     subscribe(cb: AudioActionCallback): string;
     unsubscribe(subscriptionId: string): void;
     getHowl(): Howl | undefined;
+    getHowler(): HowlerGlobal;
     getNumberOfConnections(): number;
     createHowl(options: {
         src: string;

@@ -291,6 +291,9 @@ var HowlInstanceManager = /*#__PURE__*/function () {
   _proto.getHowl = function getHowl() {
     return this.howl;
   };
+  _proto.getHowler = function getHowler() {
+    return howler.Howler;
+  };
   _proto.getNumberOfConnections = function getNumberOfConnections() {
     return this.callbacks.size;
   };
@@ -361,12 +364,14 @@ HowlInstanceManagerSingleton.instance = void 0;
 
 var useAudioPlayer = function useAudioPlayer() {
   var howlManager = react.useRef(null);
+  var howlerGlobal = react.useRef(null);
   function getHowlManager() {
     if (howlManager.current !== null) {
       return howlManager.current;
     }
     var manager = new HowlInstanceManager();
     howlManager.current = manager;
+    howlerGlobal.current = manager.getHowler();
     return manager;
   }
   var _useHowlEventSync = useHowlEventSync(getHowlManager(), react.useReducer(reducer, getHowlManager().getHowl(), initStateFromHowl)),
@@ -495,7 +500,8 @@ var useAudioPlayer = function useAudioPlayer() {
     setVolume: setVolume,
     loop: loop,
     cleanup: cleanup,
-    getHowlManager: getHowlManager
+    howlManager: howlManager,
+    howlerGlobal: howlerGlobal
   });
 };
 

@@ -1,4 +1,4 @@
-import { Howl, HowlOptions } from "howler"
+import { Howl, HowlOptions, Howler } from "howler"
 
 import { AudioLoadOptions } from "./types"
 import { Action, ActionTypes } from "./audioPlayerState"
@@ -23,6 +23,10 @@ export class HowlInstanceManager {
 
     public getHowl() {
         return this.howl
+    }
+
+    public getHowler() {
+        return Howler
     }
 
     public getNumberOfConnections() {

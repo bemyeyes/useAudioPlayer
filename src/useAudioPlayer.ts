@@ -10,9 +10,11 @@ import { AudioPlayer, LoadArguments } from "./types"
 
 export const useAudioPlayer = (): AudioPlayer & {
     cleanup: VoidFunction,
-    howlManager: MutableRefObject<HowlInstanceManager | null>
+    howlManager: MutableRefObject<HowlInstanceManager | null>,
+    howlerGlobal: MutableRefObject<HowlerGlobal | null>,
 } => {
     const howlManager = useRef<HowlInstanceManager | null>(null)
+    const howlerGlobal = useRef<HowlerGlobal | null>(null)
     function getHowlManager() {
         if (howlManager.current !== null) {
             return howlManager.current
@@ -20,6 +22,7 @@ export const useAudioPlayer = (): AudioPlayer & {
 
         const manager = new HowlInstanceManager()
         howlManager.current = manager
+        howlerGlobal.current = manager.getHowler()
         return manager
     }
 
@@ -167,6 +170,7 @@ export const useAudioPlayer = (): AudioPlayer & {
         setVolume,
         loop,
         cleanup,
-        howlManager
+        howlManager,
+        howlerGlobal
     }
 }
