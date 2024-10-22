@@ -1,4 +1,5 @@
 import { AudioPlayerState } from "./audioPlayerState";
+import { HowlErrorCallback } from "howler";
 export interface AudioPlayer extends AudioPlayerState {
     play: () => void;
     pause: () => void;
@@ -19,6 +20,7 @@ export interface UserListeners {
     onload?: () => void | undefined;
     onend?: () => void | undefined;
     onplay?: () => void | undefined;
+    onplayerror?: HowlErrorCallback;
 }
 export interface AudioLoadOptions extends UserListeners {
     loop?: boolean;
