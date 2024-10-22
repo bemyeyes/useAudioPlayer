@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useRef } from "react"
+import {MutableRefObject, useCallback, useReducer, useRef} from "react"
 import {
     ActionTypes,
     initStateFromHowl,
@@ -10,7 +10,7 @@ import { AudioPlayer, LoadArguments } from "./types"
 
 export const useAudioPlayer = (): AudioPlayer & {
     cleanup: VoidFunction,
-    getHowlManager: () => HowlInstanceManager
+    howlManager: MutableRefObject<HowlInstanceManager | null>
 } => {
     const howlManager = useRef<HowlInstanceManager | null>(null)
     function getHowlManager() {
@@ -167,6 +167,6 @@ export const useAudioPlayer = (): AudioPlayer & {
         setVolume,
         loop,
         cleanup,
-        getHowlManager
+        howlManager
     }
 }
